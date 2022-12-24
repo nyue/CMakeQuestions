@@ -5,6 +5,7 @@ project(TBBInclusion)
 find_package(TBB 2020 REQUIRED
   )
 
+# see : https://dev.my-gate.net/2021/08/04/understanding-rpath-with-cmake/
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
  
