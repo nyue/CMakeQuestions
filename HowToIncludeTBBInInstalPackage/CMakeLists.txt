@@ -40,3 +40,4 @@ foreach(_shared_lib ${TBB_tbb_shared_libraries})
 	lib)
 endforeach()
 
+include(CPack)
