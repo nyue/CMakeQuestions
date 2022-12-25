@@ -29,6 +29,16 @@ target_link_libraries(tbbi
   PUBLIC
   TBB::tbb)
 
+set(CPACK_PACKAGE_NAME "MyTBB")
+set(CPACK_PACKAGE_VENDOR "MyCompany.org")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
+    "MyTBB - TBB dependencies example")
+set(CPACK_PACKAGE_VERSION "0.0.1")
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "0")
+set(CPACK_PACKAGE_VERSION_PATCH "1")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "MyTBB-${CPACK_PACKAGE_VERSION}")
+
 if (WIN32)
   
   include (InstallRequiredSystemLibraries)
@@ -42,23 +52,14 @@ if (WIN32)
   
 else(WIN32)
   
+  set(_destination_root local/${CPACK_PACKAGE_NAME}/${CPACK_PACKAGE_VERSION})
   install(TARGETS
 	tbbi
 	DESTINATION
-	bin)
+	${_destination_root}/bin)
   
-  install(FILES $<TARGET_FILE:TBB::tbb> $<TARGET_SONAME_FILE:TBB::tbb> DESTINATION lib)
+  install(FILES $<TARGET_FILE:TBB::tbb> $<TARGET_SONAME_FILE:TBB::tbb> DESTINATION ${_destination_root}/lib)
   
 endif(WIN32)
-
-set(CPACK_PACKAGE_NAME "MyTBB")
-set(CPACK_PACKAGE_VENDOR "MyCompany.org")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
-    "MyTBB - TBB dependencies example")
-set(CPACK_PACKAGE_VERSION "0.0.1")
-set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "0")
-set(CPACK_PACKAGE_VERSION_PATCH "1")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "MyTBB-${CPACK_PACKAGE_VERSION}")
 
 include(CPack)
