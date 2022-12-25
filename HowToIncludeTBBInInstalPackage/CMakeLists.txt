@@ -29,11 +29,21 @@ target_link_libraries(tbbi
   PUBLIC
   TBB::tbb)
 
+if (WIN32)
+install(TARGETS tbbi
+DESTINATION bin
+RUNTIME_DEPENDENCIES
+PRE_EXCLUDE_REGEXES "api-ms-" "ext-ms-"
+POST_EXCLUDE_REGEXES ".*system32/.*\\dll"
+DIRECTORIES $<TARGET_FILE_DIR:TBB::tbb>)
+else(WIN32)
+
 install(TARGETS
   tbbi
   DESTINATION
   bin)
 
 install(FILES $<TARGET_FILE:TBB::tbb> $<TARGET_SONAME_FILE:TBB::tbb> DESTINATION lib)
+endif(WIN32)
 
 include(CPack)
